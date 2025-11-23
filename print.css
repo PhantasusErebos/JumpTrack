@@ -1,0 +1,238 @@
+:root {
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --accent: #2980b9;
+    --border: #bdc3c7;
+    --bg-card: #f8f9fa;
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Outfit', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background-color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+.print-controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.print-controls button {
+    padding: 10px 20px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.document-container {
+    max-width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Header */
+.main-header {
+    text-align: center;
+    border-bottom: 4px double var(--text-main);
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+}
+
+.main-header h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.chain-meta {
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+}
+
+/* Jump Container */
+.jump-container {
+    margin-bottom: 50px;
+    break-inside: avoid;
+    /* Try to keep small jumps together */
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 40px;
+}
+
+.jump-header {
+    background: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    break-after: avoid;
+}
+
+.jump-header h2 {
+    font-family: var(--font-heading);
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.jump-number {
+    opacity: 0.6;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+/* Character Section */
+.character-section {
+    margin-bottom: 30px;
+    padding-left: 10px;
+    border-left: 4px solid #eee;
+}
+
+.character-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
+}
+
+.char-name {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.char-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 15px;
+}
+
+.origin-description {
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #555;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Sections (Perks, Items, etc) */
+.doc-section {
+    margin-bottom: 20px;
+    break-inside: avoid;
+}
+
+.doc-section h3 {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.item-card {
+    border: 1px solid #eee;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background: white;
+    break-inside: avoid;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.item-cost {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-muted);
+    font-size: 0.9em;
+}
+
+.item-cost.gain {
+    color: #27ae60;
+}
+
+.item-description {
+    font-size: 0.9rem;
+    color: #444;
+    white-space: pre-wrap;
+}
+
+.item-reward {
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.doc-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-top: 50px;
+}
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .print-controls {
+        display: none;
+    }
+
+    .document-container {
+        width: 100%;
+        max-width: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .jump-header {
+        background: none;
+        color: black;
+        border-bottom: 3px solid black;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    .character-section {
+        border-left: 2px solid #ccc;
+    }
+}

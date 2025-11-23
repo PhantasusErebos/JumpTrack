@@ -1,0 +1,92 @@
+{
+  "name": "Cosmic Traveler",
+  "theme": "cyberpunk",
+  "companions": [
+    {
+      "id": "c_101",
+      "name": "Cortana",
+      "description": "A smart AI companion."
+    },
+    {
+      "id": "c_102",
+      "name": "Garrus",
+      "description": "Turian sharpshooter."
+    }
+  ],
+  "jumps": [
+    {
+      "id": 1700000000001,
+      "type": "supplement",
+      "name": "Cosmic Warehouse",
+      "origin": "Personal Reality",
+      "originDescription": "A pocket dimension for storing items.",
+      "budget": 0,
+      "perks": [
+        { "name": "Shelving Units", "cost": 0, "description": "Infinite shelving for all your items." },
+        { "name": "Stasis Pods", "cost": 50, "description": "Keeps things fresh forever." }
+      ],
+      "items": [
+        { "name": "Workbench", "cost": 0, "description": "Basic tools for maintenance." }
+      ],
+      "companions": [],
+      "drawbacks": [],
+      "scenarios": [],
+      "logs": [],
+      "altForms": [],
+      "notes": [],
+      "companionBuilds": {}
+    },
+    {
+      "id": 1700000000002,
+      "type": "jump",
+      "name": "Pokemon Trainer",
+      "origin": "Drop-In",
+      "originDescription": "Woke up in Pallet Town with a backpack.",
+      "budget": 1000,
+      "perks": [
+        { "name": "Physical Fitness", "cost": 100, "description": "You can run forever without getting tired." },
+        { "name": "Savant", "cost": 400, "description": "You learn skills at a terrifying rate." }
+      ],
+      "items": [
+        { "name": "Bicycle", "cost": 50, "description": "A folding bike that fits in your bag." },
+        { "name": "Pokedex", "cost": 0, "description": "Identifies any pokemon you see." }
+      ],
+      "companions": [
+        { "name": "Import Companion", "cost": 50, "description": "Importing Cortana." }
+      ],
+      "drawbacks": [
+        { "name": "Hunted", "cost": 200, "description": "Team Rocket is always after you." }
+      ],
+      "scenarios": [
+        { "name": "Champion", "rewardValue": 500, "rewardDescription": "Become the League Champion.", "description": "Defeat the Elite Four." }
+      ],
+      "logs": [
+        { "name": "Arrival", "date": "11/23/2025, 10:00:00 AM", "description": "Just arrived. The air smells like adventure." }
+      ],
+      "altForms": [
+        { "name": "Trainer Sprite", "description": "You look like a pixelated sprite." }
+      ],
+      "notes": [
+        { "name": "Strategy", "description": "Focus on speed and status effects." }
+      ],
+      "companionBuilds": {
+        "c_101": {
+          "budget": 600,
+          "origin": "Scientist",
+          "originDescription": "Studying Pokemon data.",
+          "perks": [
+            { "name": "Data Analysis", "cost": 200, "description": "Instantly analyze battle stats." }
+          ],
+          "items": [
+            { "name": "Laptop", "cost": 100, "description": "High-tech portable computer." }
+          ],
+          "drawbacks": [],
+          "scenarios": [],
+          "logs": [],
+          "altForms": [],
+          "notes": []
+        }
+      }
+    }
+  ]
+}

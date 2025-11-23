@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JumpTrack</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="brand">
+                <h1>JUMP<span class="accent">TRACK</span></h1>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="btn-profile" class="btn-secondary">👤 Jumper Profile</button>
+            </div>
+
+            <div class="sidebar-content">
+                <div id="sidebar-list" class="sidebar-list">
+                    <!-- Supplements Section -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">
+                            <span>Supplements</span>
+                            <button id="btn-add-supplement" class="icon-btn small-add" title="Add Supplement">+</button>
+                        </div>
+                        <div id="sidebar-supplements"></div>
+                    </div>
+
+                    <!-- Jumps Section -->
+                    <div class="sidebar-section">
+                        <div class="sidebar-header">
+                            <span>Jump Chain</span>
+                            <button id="btn-add-jump" class="icon-btn small-add" title="Add Jump">+</button>
+                        </div>
+                        <div id="sidebar-jumps"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="btn-export" class="btn-secondary">📤 Export JSON</button>
+                <button id="btn-import" class="btn-secondary">📥 Import JSON</button>
+                <button id="btn-print-build" class="btn-secondary" style="margin-top: 5px;">🖨️ Print Build</button>
+                <button id="btn-clear-data" class="btn-secondary danger-zone btn-clear-data">⚠️ Clear All
+                    Data</button>
+                <input type="file" id="file-import" class="hidden-input" accept=".json">
+
+                <div class="theme-switcher"
+                    style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 10px; opacity: 0.7;">
+                    <button id="btn-theme-prev" class="icon-btn"
+                        style="font-size: 0.7rem; padding: 2px 5px; background: transparent; border: 1px solid var(--border-color);">◀</button>
+                    <span id="theme-label"
+                        style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted); min-width: 60px; text-align: center;">Default</span>
+                    <button id="btn-theme-next" class="icon-btn"
+                        style="font-size: 0.7rem; padding: 2px 5px; background: transparent; border: 1px solid var(--border-color);">▶</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Welcome Screen / Guide -->
+            <!-- Welcome Screen / Guide -->
+            <div id="landing-guide" class="landing-guide">
+                <div class="hero-section">
+                    <h1 class="hero-title">JUMP<span class="accent">TRACK</span></h1>
+                    <p class="hero-subtitle">Your Multiversal Companion</p>
+                    <p class="hero-desc">The ultimate tool for tracking your Jumpchain builds, perks, items, and
+                        companions across the multiverse.</p>
+                </div>
+
+                <div class="guide-grid">
+                    <div class="guide-card">
+                        <div class="card-icon">🚀</div>
+                        <h3>Start Your Journey</h3>
+                        <p>Begin a new adventure by adding a Jump from the sidebar. Define your origin and set your
+                            budget.</p>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="card-icon">💎</div>
+                        <h3>Build Your Legend</h3>
+                        <p>Catalog every Perk, Item, and Drawback. Watch your CP budget update in real-time as you craft
+                            your build.</p>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="card-icon">👥</div>
+                        <h3>Gather Allies</h3>
+                        <p>Manage a global roster of Companions. Import them into jumps to give them their own unique
+                            loadouts.</p>
+                    </div>
+
+                    <div class="guide-card">
+                        <div class="card-icon">📜</div>
+                        <h3>Print & Share</h3>
+                        <p>Generate beautiful, printer-friendly documents of your entire chain history with a single
+                            click.</p>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div id="jump-details" class="hidden">
+                <header class="jump-header glass-panel">
+                    <div class="header-top">
+                        <!-- <button id="btn-delete-jump" class="icon-btn danger" title="Delete Jump">🗑️</button> -->
+                        <input type="text" id="jump-name" placeholder="Jump Name" class="editable-title">
+                        <div class="character-switcher-container">
+                            <select id="character-select" class="character-select">
+                                <option value="jumper">Jumper</option>
+                                <!-- Companion options injected here -->
+                            </select>
+                            <button id="btn-import-companion" class="icon-btn" title="Import Companion">⬇️</button>
+                        </div>
+                    </div>
+                    <div class="budget-display">
+                        <div class="budget-item">
+                            <span class="label">Initial Budget</span>
+                            <input type="number" id="cp-budget-input" class="budget-input" value="1000">
+                        </div>
+                        <div class="budget-item">
+                            <span class="label">Spent</span>
+                            <span class="value" id="cp-spent">0</span>
+                        </div>
+                        <div class="budget-item">
+                            <span class="label">Remaining</span>
+                            <span class="value highlight" id="cp-remaining">1000</span>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="jump-meta glass-panel jump-meta-container">
+                    <div style="display: flex; gap: 10px; width: 100%; align-items: center;">
+                        <input type="text" id="jump-origin" placeholder="Origin / Background" class="input-origin"
+                            style="flex: 1;">
+                        <button id="btn-migrate-origin" class="icon-btn" title="Migrate to Alt Form">➡️</button>
+                    </div>
+                    <textarea id="jump-origin-description" placeholder="Origin Description / Notes..."
+                        class="entry-description origin-desc-input"></textarea>
+                </div>
+
+                <div class="content-grid expanded">
+                    <!-- Row 1 -->
+                    <!-- Perks Column -->
+                    <div class="column">
+                        <div class="panel-header">
+                            <h3>Perks</h3>
+                            <button id="btn-add-perk" class="icon-btn">+</button>
+                        </div>
+                        <div id="perk-list" class="scroll-list"></div>
+                    </div>
+
+                    <!-- Items Column -->
+                    <div class="column">
+                        <div class="panel-header">
+                            <h3>Items</h3>
+                            <button id="btn-add-item" class="icon-btn">+</button>
+                        </div>
+                        <div id="item-list" class="scroll-list"></div>
+                    </div>
+
+                    <!-- Companions Column -->
+                    <div class="column">
+                        <div class="panel-header">
+                            <h3>Companions</h3>
+                            <button id="btn-add-companion" class="icon-btn">+</button>
+                        </div>
+                        <div id="companion-list" class="scroll-list"></div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <!-- Drawbacks Column -->
+                    <div class="column">
+                        <div class="panel-header">
+                            <h3>Drawbacks</h3>
+                            <button id="btn-add-drawback" class="icon-btn danger">+</button>
+                        </div>
+                        <div id="drawback-list" class="scroll-list"></div>
+                    </div>
+
+                    <!-- Row 3: Scenarios & Events (Logs) -->
+                    <div class="panel glass-panel">
+                        <div class="panel-header">
+                            <h3>Scenarios</h3>
+                            <button id="btn-add-scenario" class="icon-btn">+</button>
+                        </div>
+                        <div id="scenario-list" class="entry-list"></div>
+                    </div>
+
+                    <div class="panel glass-panel">
+                        <div class="panel-header">
+                            <h3>Events</h3>
+                            <button id="btn-add-log" class="icon-btn">+</button>
+                        </div>
+                        <div id="log-list" class="entry-list"></div>
+                    </div>
+
+                    <!-- Row 4: Alt Forms & Misc Notes -->
+                    <div class="panel glass-panel">
+                        <div class="panel-header">
+                            <h3>Alt Forms</h3>
+                            <button id="btn-add-altform" class="icon-btn">+</button>
+                        </div>
+                        <div id="altform-list" class="entry-list"></div>
+                    </div>
+
+                    <div class="panel glass-panel">
+                        <div class="panel-header">
+                            <h3>Misc Notes</h3>
+                            <button id="btn-add-note" class="icon-btn">+</button>
+                        </div>
+                        <div id="note-list" class="entry-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Jumper Profile View -->
+            <div id="jumper-profile" class="hidden">
+                <div id="jumper-profile" class="glass-panel profile-panel">
+                    <div class="profile-header">
+                        <h2>Jumper Profile</h2>
+                        <div class="stats-summary">
+                            <span class="stat-tag">Perks: <b id="profile-total-perks">0</b></span>
+                            <span class="stat-tag">Items: <b id="profile-total-items">0</b></span>
+                            <span class="stat-tag">Scenarios: <b id="profile-total-scenarios">0</b></span>
+                            <span class="stat-tag">Events: <b id="profile-total-events">0</b></span>
+                        </div>
+                    </div>
+
+                    <!-- Companion Roster Section Removed -->
+
+                    <div class="profile-controls">
+                        <select id="profile-filter" class="character-select profile-filter-select">
+                            <option value="Jumper" selected>Jumper</option>
+                            <!-- Companions injected here -->
+                        </select>
+                        <input type="text" id="profile-search" placeholder="Search across all jumps..."
+                            class="search-bar profile-search-bar">
+                    </div>
+                    <div id="profile-results" class="profile-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div id="modal-overlay" class="hidden">
+        <div class="modal-content glass-panel">
+            <h3 id="modal-title">Title</h3>
+            <div id="modal-body"></div>
+            <div class="modal-footer">
+                <button id="btn-close-modal" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
